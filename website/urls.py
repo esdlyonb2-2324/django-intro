@@ -12,7 +12,6 @@ urlpatterns = [
     path('messages/response/add/<str:id>', views.add_response, name='response_message'),
     path('messages/<str:id>', views.show_message, name='show_message'),
     path('register', views.register, name='register'),
-    path('register', views.register, name='register'),
     path('login', views.login_user, name='login'),
     path('logout', views.logout_user, name='logout'),
 
