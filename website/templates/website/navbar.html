@@ -9,21 +9,27 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'all_messages' %}">Messages</a>
         </li>
-        <li class="nav-item">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}" aria-disabled="true">Logout</a>
+        </li>
+      <li class="nav-item">
           <a class="nav-link" href="{% url 'new_message' %}">New</a>
         </li>
+                      <li class="nav-item">
+          <span class="nav-link">Bonjour {{ request.user.username }}</span>
+        </li>
+         {% else %}
+
         <li class="nav-item">
-          <a class="nav-link" aria-disabled="true">Login</a>
+          <a class="nav-link" href="{% url 'login' %}" aria-disabled="true">Login</a>
         </li>
           <li class="nav-item">
-          <a class="nav-link" aria-disabled="true">Logout</a>
+          <a class="nav-link" href="{% url 'register' %}" aria-disabled="true">Register</a>
         </li>
-          <li class="nav-item">
-          <a class="nav-link" aria-disabled="true">Register</a>
-        </li>
-         <li class="nav-item">
-          <span class="nav-link">Bonjour Luc</span>
-        </li>
+    {% endif %}
+
+
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
