@@ -2,7 +2,6 @@ from rest_framework.serializers import ModelSerializer
 
 from website.models import Message
 
-
 class MessageSerializer(ModelSerializer):
     class Meta:
         model = Message
