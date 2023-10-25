@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'bootstrap5',
     'crispy_forms',
-    'crispy_bootstrap5'
+    'crispy_bootstrap5',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

@@ -21,3 +21,4 @@ class Response(models.Model):
     content = models.CharField(max_length=900)
     message = models.ForeignKey(Message, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=False, default="missing_author")
+
