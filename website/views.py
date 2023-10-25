@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .forms import MessageForm, RegisterForm
-from .models import Message, User
+from .forms import MessageForm, RegisterForm, ResponseForm
+from .models import Message, User, Response
 
 
 # Create your views here.
@@ -33,8 +33,9 @@ def all_messages(request):
 def show_message(request, id):
 
     message = Message.objects.get(id=id)
+    responseForm = ResponseForm()
 
-    return render(request, 'website/show.html', {"message":message})
+    return render(request, 'website/show.html', {"message": message, "responseForm": responseForm})
 
 @login_required(login_url='login')
 def new_message(request):
@@ -50,8 +51,8 @@ def new_message(request):
 
     return render(request, 'website/new_message.html',{'form' : form})
 
-@login_required(login_url='login')
 
+@login_required(login_url='login')
 def edit_message(request, id):
     message = Message.objects.get(id=id)
     if message.author != request.user:
@@ -110,3 +111,19 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('all_messages')
+
+@login_required(login_url='login')
+
+def add_response(request, id):
+    message = Message.objects.get(id=id)
+    if message is None:
+        return redirect('all_messages')
+    if request.method == 'POST':
+        form = ResponseForm(data=request.POST)
+        if form.is_valid():
+            response = form.save(commit=False)
+            response.message = message
+            response.author = request.user
+            response.save()
+
+    return redirect('show_message', message.id)

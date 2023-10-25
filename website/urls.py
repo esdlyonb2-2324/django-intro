@@ -9,6 +9,7 @@ urlpatterns = [
     path('messages/new', views.new_message, name='new_message'),
     path('messages/edit/<str:id>', views.edit_message, name='edit_message'),
     path('messages/delete/<str:id>', views.delete_message, name='delete_message'),
+    path('messages/response/add/<str:id>', views.add_response, name='response_message'),
     path('messages/<str:id>', views.show_message, name='show_message'),
     path('register', views.register, name='register'),
     path('register', views.register, name='register'),

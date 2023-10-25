@@ -1,17 +1,23 @@
+from django import forms
 from django.forms import ModelForm, Textarea
-
-from website.models import Message, User
+from django import forms
+from website.models import Message, User, Category, Response
 
 
 class MessageForm(ModelForm):
     class Meta:
         model = Message
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'category']
         widgets = {
             "content" : Textarea(attrs={"cols": 20, "rows": 4})
 
         }
+    category = forms.ModelChoiceField(queryset=Category.objects.all())
 
+class ResponseForm(ModelForm):
+    class Meta:
+        model = Response
+        fields = ['content']
 class RegisterForm(ModelForm):
     class Meta:
         model = User
