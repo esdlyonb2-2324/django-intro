@@ -10,5 +10,5 @@ class Message(models.Model):
 
     title = models.CharField(max_length=255)
     content = models.CharField(max_length=1000)
-
+    author = models.ForeignKey(User, null=False, on_delete=models.CASCADE, default="missing_author")
 

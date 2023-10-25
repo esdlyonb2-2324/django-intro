@@ -43,6 +43,7 @@ def new_message(request):
         form = MessageForm(request.POST)
         if form.is_valid():
             message = form.save(commit=False)
+            message.author = request.user
             message.save()
             return redirect('show_message', message.id)
 
@@ -53,6 +54,8 @@ def new_message(request):
 
 def edit_message(request, id):
     message = Message.objects.get(id=id)
+    if message.author != request.user:
+        return redirect('all_messages')
     form = MessageForm(instance=message)
     if request.method == 'POST':
         form = MessageForm(data=request.POST, instance=message)
@@ -65,6 +68,8 @@ def edit_message(request, id):
 
 def delete_message(request, id):
     message = Message.objects.get(id=id)
+    if message.author != request.user:
+        return redirect('all_messages')
     message.delete()
     return redirect('all_messages')
 
