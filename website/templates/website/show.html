@@ -11,9 +11,11 @@
     <p>{{ message.title }}</p>
    <p>{{ message.content }}</p>
 <p>----------------</p>
+    <a href="{% url 'edit_message' message.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'delete_message' message.id %}" class="btn btn-danger">Delete</a>
 
+<a class="btn btn-primary" href="{% url 'home_bidule' %}">bidule</a>
 
-<a href="{% url 'home_bidule' %}">bidule</a>
 
 
 {% endblock %}
