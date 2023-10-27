@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from website.api.serialzers import MessageSerializer
+from website.api.serializers import MessageSerializer
 from website.models import Message, User, Category
 
 
@@ -23,9 +23,7 @@ def new_messages(request):
     if request.method == 'POST':
         newMessage = Message()
         newMessage.author = User.objects.get(id=1)
-        newMessage.category = Category.objects.get(id=request.POST.get["category"])
         message = MessageSerializer(instance=newMessage, data=request.data)
-
         if message.is_valid():
             message.save()
             return Response(message.data)
